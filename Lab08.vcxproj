@@ -148,6 +148,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ground.h" />
+    <ClInclude Include="angle.h" />
+    <ClInclude Include="testTrajectoryEngine.h" />
+    <ClInclude Include="testProjectile.h" />
+    <ClInclude Include="velocity.h" />
+    <ClInclude Include="trajectoryEngine.h" />
+    <ClInclude Include="statisticsDisplay.h" />
+    <ClInclude Include="projectile.h" />
+    <ClInclude Include="howitzer.h" />
+    <ClInclude Include="simulator.h" />
     <ClInclude Include="position.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="testGround.h" />
