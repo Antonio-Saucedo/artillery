@@ -17,6 +17,8 @@
 #include "ground.h"     // for GROUND
 #include "position.h"   // for POINT
 #include "test.h"       // for TESTRUNNER()
+//#include "testProjectile.h"
+//#include "testTrajectoryEngine.h"
 using namespace std;
 
 /*************************************************************************

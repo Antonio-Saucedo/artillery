@@ -1,10 +1,2 @@
-﻿  ground.cpp
-  Lab08.cpp
-  position.cpp
-  test.cpp
-  uiDraw.cpp
-  uiInteract.cpp
-C:\Users\anton\Desktop\School\7School January 2023\CSE_230-Encapsulation_Design\Labs\artillery_project\uiInteract.cpp(291,74): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\anton\Desktop\School\7School January 2023\CSE_230-Encapsulation_Design\Labs\artillery_project\uiInteract.cpp(291,46): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
+﻿  Lab08.cpp
   Lab08.vcxproj -> C:\Users\anton\Desktop\School\7School January 2023\CSE_230-Encapsulation_Design\Labs\artillery_project\x64\Debug\Lab08.exe
