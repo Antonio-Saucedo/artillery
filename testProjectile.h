@@ -31,7 +31,6 @@ public:
         test_updatePoint_upperOutterBoundaryInterval(); // Max interval exceeded
         test_updatePoint_unreasonableInterval(); // Max interval exceeded
         test_updatePoint_negativeInterval(); // Error: Negative interval
-        test_updatePoint_wrongDataType(); // Error: Wrong data type
 
         test_hit(); // Check hit value updated
     }
@@ -40,192 +39,156 @@ private:
     void test_getPreviousPoints_noPoints()
     {
         // setup
-        float previousPoint = Projectile::previous;
-        list<Position> previous = {};
-        previousPoint = previous;
-
+        Projectile p;
+        p.previous = {};
         // exercise
-        list<Position> previousActual = Projectile.getPreviousPoints();
-        
+        list<Position> previousActual = p.getPreviousPoints();
         // verify
-        assert(previousActual.size == 0);
-        
+        assert(previousActual.size() == 0);
         // teardown
-        Position::previous = previous;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_getPreviousPoints_onePoint()
     {
         // setup
-        float previousPoint = Projectile::previous;
-        Projectile::previous = {Position.setMetersX(10), Position.setMetersY(10)};
-        list<Position> previous = {};
-        previousPoint = previous;
-
+        Projectile p;
+        p.previous = {Position()};
         // exercise
-        list<Position> previousActual = Projectile.getPreviousPoints();
-
+        list<Position> previousActual = p.getPreviousPoints();
         // verify
-        assert(previousActual.size == 1);
-
+        assert(previousActual.size() == 1);
         // teardown
-        Position::previous = previous;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_getPreviousPoints_tenPoints()
     {
         // setup
-        float previousPoint = Projectile::previous;
-        Projectile::previous = {
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10),
-            Position.setMetersX(10), Position.setMetersY(10)
-        };
-        list<Position> previous = {};
-        previousPoint = previous;
-
+        Projectile p;
+        p.previous = {Position(), Position(), Position(), 
+                        Position(), Position(), Position(),
+                        Position(), Position(), Position(), 
+                        Position()};
         // exercise
-        list<Position> previousActual = Projectile.getPreviousPoints();
-
+        list<Position> previousActual = p.getPreviousPoints();
         // verify
-        assert(previousActual.size == 10);
-
+        assert(previousActual.size() == 10);
         // teardown
-        Position::previous = previous;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_updatePoint_noInterval()
     {
         // setup
-        float interval = Projectile::interval;
-        Projectile::interval = NULL;
-
+        Projectile p;
+        p.current = Position(50,50);
+        p.velocity = Velocity(300, 100);
         // exercise
-        float intervalActual = Projectile::interval;
-
+        p.updatePoint(0);
         // verify
-        assert(intervalActual == NULL);
-
+        assert(p.current.getMetersX() == 50);
+        assert(p.current.getMetersY() == 50);
         // teardown
-        Projectile::interval = interval;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_updatePoint_lowerInnerBoundaryInterval()
     {
         // setup
-        float interval = Projectile::interval;
-        Projectile::interval = 0.01;
-
+        Projectile p;
+        p.current = Position(50, 50);
+        p.velocity = Velocity(300, 100);
         // exercise
-        float intervalActual = Projectile::interval;
-
+        p.updatePoint(0.01);
         // verify
-        assert(intervalActual == 0.01);
-
+        assert(p.current.getMetersX() == 53);
+        assert(p.current.getMetersY() == 51);
         // teardown
-        Projectile::interval = interval;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_updatePoint_upperLimitInterval()
     {
         // setup
-        float interval = Projectile::interval;
-        Projectile::interval = 1;
-
+        Projectile p;
+        p.current = Position(50, 50);
+        p.velocity = Velocity(300, 100);
         // exercise
-        float intervalActual = Projectile::interval;
-
+        p.updatePoint(1);
         // verify
-        assert(intervalActual == 1);
-
+        assert(p.current.getMetersX() == 350);
+        assert(p.current.getMetersY() == 150);
         // teardown
-        Projectile::interval = interval;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_updatePoint_upperOutterBoundaryInterval()
     {
         // setup
-        float interval = Projectile::interval;
-        Projectile::interval = 1.001;
-
-        // exercise
-        float intervalActual = Projectile::interval;
-
-        // verify
-        assert(intervalActual == 1.001);
-
+        Projectile p;
+        p.current = Position(50, 50);
+        p.velocity = Velocity(300, 100);
+        // exercise and verify
+        try { 
+            p.updatePoint(1.001);
+            assert(false);
+        }
+        catch (const std::exception& e) {
+            assert(true);
+        }
         // teardown
-        Projectile::interval = interval;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
 
     void test_updatePoint_unreasonableInterval()
     {
         // setup
-        float interval = Projectile::interval;
-        Projectile::interval = 10;
-
-        // exercise
-        float intervalActual = Projectile::interval;
-
-        // verify
-        assert(intervalActual == 10);
-
+        Projectile p;
+        p.current = Position(50, 50);
+        p.velocity = Velocity(300, 100);
+        // exercise and verify
+        try {
+            p.updatePoint(10);
+            assert(false);
+        }
+        catch (const std::exception& e) {
+            assert(true);
+        }
         // teardown
-        Projectile::interval = interval;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of 
     }
 
     void test_updatePoint_negativeInterval()
     {
         // setup
-        float interval = Projectile::interval;
-        Projectile::interval = -1;
-
-        // exercise
-        float intervalActual = Projectile::interval;
-
-        // verify
-        assert(intervalActual == -1);
-
+        Projectile p;
+        p.current = Position(50, 50);
+        p.velocity = Velocity(300, 100);
+        // exercise and verify
+        try {
+            p.updatePoint(-1);
+            assert(false);
+        }
+        catch (const std::exception& e) {
+            assert(true);
+        }
         // teardown
-        Projectile::interval = interval;
-    }
-
-    void test_updatePoint_wrongDataType()
-    {
-        // setup
-        float interval = Projectile::interval;
-        Projectile::interval = "A";
-
-        // exercise
-        float intervalActual = Projectile::interval;
-
-        // verify
-        assert(intervalActual == "A");
-
-        // teardown
-        Projectile::interval = interval;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of 
     }
 
     void test_hit()
     {
         // setup
-        bool hit = Projectile::hit;
-        Projectile::hit = true;
+        Projectile p;
+        p.airborne = true;
 
         // exercise
-        bool hitActual = Projectile::hit;
-
+        p.hit();
         // verify
-        assert(hitActual == true);
+        assert(p.airborne == false);
 
         // teardown
-        Projectile::hit = hit;
+        // no teardown needed, the Projectile object will be destroyed when it goes out of 
     }
 };
