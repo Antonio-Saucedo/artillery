@@ -8,14 +8,14 @@
  *    moving along a parabolic trajectory. It includes properties like 
  *    initial velocity and mass
  ************************************************************************/
-
-
 #pragma once
-#include <iostream>
-#include <list>
+
 #include "position.h"
 #include "velocity.h"
 #include "trajectoryEngine.h"
+
+#include <iostream>
+#include <list>
 
 using namespace std;
 
@@ -35,12 +35,11 @@ private:
 
 public:
 	// Constructor
-	Projectile();
-
-	list<Position> getPreviousPoints();
+	Projectile(Position start) : current{ start } {};
+	const list<Position>& getPreviousPoints() const {return previous;}	
 	void updatePoint(float interval);
-	Position getCurrentPoint();
-	bool isAirborne();
-	bool hit();
-	float getSpeed();
+	Position getCurrentPoint() { return current; };
+	bool isAirborne() { return airborne; };
+	bool hit() { if (airborne)airborne = false; };
+	float getSpeed() { return velocity.getSpeed(); };
 };

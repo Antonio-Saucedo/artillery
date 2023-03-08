@@ -33,6 +33,9 @@
     <ClCompile Include="ground.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="trajectoryEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ground.h">
@@ -80,7 +83,7 @@
     <ClInclude Include="testProjectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="testTrajectoryEngine.h">
+    <ClInclude Include="testHowitzer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,13 +1,24 @@
+/***********************************************************************
+ * Header File:
+ *   Velocity
+ * Author:
+ *    Antonio Saucedo, Thomas Vargas
+ * Summary:
+ *    A velocity vector
+ ************************************************************************/
+#pragma once
 
-class TestProjectile;
+#include <cmath>
+
 
 class Velocity {
-    friend TestProjectile;
 public:
     // Class fields and methods go here
-    Velocity(double x, double y) : y{ y }, x{x} {}
+    Velocity() {};
+    Velocity(double dx, double dy) : dy{ dy }, dx{ dx } {};
+    double getSpeed() { return std::sqrt(dx * dx + dy * dy);};
 
 private:
-    double x;
-    double y;
+    double dx;
+    double dy;
 };

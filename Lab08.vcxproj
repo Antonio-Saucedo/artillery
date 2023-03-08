@@ -143,6 +143,7 @@
     <ClCompile Include="Lab08.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="test.cpp" />
+    <ClCompile Include="trajectoryEngine.cpp" />
     <ClCompile Include="uiDraw.cpp" />
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
