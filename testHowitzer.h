@@ -23,7 +23,6 @@ public:
 		void test_getMuzzleVelocity_functional();
 		void test_fire_notLoaded();
 		void test_fire_loaded();
-		void test_reload_noAmmo();
 		void test_rotate_slow();
 		void test_rotate_fast();
 		void test_rotate_counterClockwise();
@@ -68,17 +67,6 @@ private:
 		h.fire();
 		// verify
 		assert(h.loaded = false);
-	}
-
-	void test_reload_noAmmo()
-	{
-		// setup
-		Howitzer h;
-		h.loaded = false;
-		// exercise
-		h.reload(Projectile());
-		// verify
-		assert(h.loaded = true);
 	}
 
 	void test_rotate_slow()

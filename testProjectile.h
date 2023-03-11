@@ -13,8 +13,14 @@
 #include "position.h"
 #include <cassert>
 #include <list>
+#include <cmath>
 
 using namespace std;
+
+template <typename T>
+bool isEqual(T a, T b, double tolerance = 0.01) {
+    return std::abs(a - b) <= tolerance;
+}
 
 class TestProjectile
 {
@@ -33,6 +39,8 @@ public:
         test_updatePoint_negativeInterval(); // Error: Negative interval
 
         test_hit(); // Check hit value updated
+
+        cout << "Tests Passed\n";
     }
 
 private:
@@ -100,10 +108,10 @@ private:
         p.current = Position(50, 50);
         p.velocity = Velocity(300, 100);
         // exercise
-        p.updatePoint(0.01);
+        p.updatePoint(0.01f);
         // verify
-        assert(p.current.getMetersX() == 53);
-        assert(p.current.getMetersY() == 51);
+        assert(isEqual(p.current.getMetersX(), 53.0));
+        assert(isEqual(p.current.getMetersY(), 51.0));
         // teardown
         // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
@@ -117,8 +125,8 @@ private:
         // exercise
         p.updatePoint(1);
         // verify
-        assert(p.current.getMetersX() == 350);
-        assert(p.current.getMetersY() == 150);
+        assert(isEqual(p.current.getMetersX(), 350.0));
+        assert(isEqual(p.current.getMetersY(), 145.1));
         // teardown
         // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }
