@@ -107,13 +107,13 @@ float TrajectoryEngine::nextPosition(Position& position,
 									float angle) {
 
 	float radius = diameter / 2;
-	float area = 3.14159 * radius * radius;
-	float altitude = position.getMetersY();
+	float area = 3.14159f * radius * radius;
+	float altitude = (float) position.getMetersY();
 	float airDenisty = get_linear_interpolated_result(airDensities, altitude);
 	float soundSpeed = get_linear_interpolated_result(soundSpeeds, altitude);
-	float mach = velocity.getSpeed() / soundSpeed;
+	float mach = (float) velocity.getSpeed() / soundSpeed;
 	float dragCoefficient = get_linear_interpolated_result(dragCoefficients, mach);
-	float dragForce = dragCoefficient * airDenisty * velocity.getSpeed() * velocity.getSpeed() * area;
+	float dragForce = (float) (dragCoefficient * airDenisty * velocity.getSpeed() * velocity.getSpeed() * area);
 	float gravity = -get_linear_interpolated_result(gravityForces, altitude);
 
 	float newtons = dragForce / mass;
@@ -123,8 +123,8 @@ float TrajectoryEngine::nextPosition(Position& position,
 	position.setMetersX(position.getMetersX() + (velocity.getDx() * time) + (0.5 * ddx * (time * time)));
 	position.setMetersY(position.getMetersY() + (velocity.getDy() * time) + (0.5 * ddy * (time * time)));
 
-	velocity.setDx(velocity.getDx() + (ddx * time));
-	velocity.setDy(velocity.getDy() + (ddy * time));
+	velocity.setDx(((float) velocity.getDx()) + (ddx * time));
+	velocity.setDy(((float) velocity.getDy()) + (ddy * time));
 
 }
 
@@ -141,13 +141,13 @@ float TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<flo
 		}
 
 		// initialize previous pair to the first pair in the vector
-		std::pair<int, double> prevPair = data.front();
+		std::pair<float, float> prevPair = data.front();
 
 		if (!(target > x.first)) {
-			double y1 = prevPair.second;
-			double x3 = x.first;
-			double x1 = prevPair.first;
-			double y3 = x.second;
+			float y1 = prevPair.second;
+			float x3 = x.first;
+			float x1 = prevPair.first;
+			float y3 = x.second;
 			return applyLI(x1, target, x3, y1, y3);
 		}
 		prevPair = x;
@@ -159,7 +159,7 @@ float TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<flo
 
 
 float TrajectoryEngine::applyLI(float x1, float x2, float x3, float y1, float y3) {
-	double y2 = (((x2 - x3) * (y3 - y1)) / (x1 - x3)) + y1;
+	float y2 = (((x2 - x3) * (y3 - y1)) / (x1 - x3)) + y1;
 	return y2;
 }
 

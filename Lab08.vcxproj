@@ -144,6 +144,8 @@
     <ClCompile Include="program.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="projectile.cpp" />
+    <ClCompile Include="simulator.cpp" />
+    <ClCompile Include="statisticsDisplay.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="trajectoryEngine.cpp" />
     <ClCompile Include="uiDraw.cpp" />

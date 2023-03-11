@@ -28,8 +28,8 @@ public:
 
     // constructors
     Howitzer(Position p) : location(p) {
-        slowRotateSpeed = 0.17;
-        fastRotateSpeed = 2.86;
+        slowRotateSpeed = 0.17f;
+        fastRotateSpeed = 2.86f;
     }
 
     void draw(ogstream o, float age) { o.drawHowitzer(location, angle, age); };
@@ -37,11 +37,12 @@ public:
     float getMuzzleVelocity() { return muzzleVelocity; };
     Projectile fire(); //create a new projectile here and set loaded to false
     void rotate(bool clockwise, bool isFastRotation);
+    Position getPosition() { return location; };
 
 
 
 private:
-    static int muzzleVelocity;
+    static float muzzleVelocity;
     float angle;
     bool loaded;
     float slowRotateSpeed;

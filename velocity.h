@@ -14,15 +14,14 @@
 class Velocity {
 public:
     // Class fields and methods go here
-    Velocity() {};
-    Velocity(double dx, double dy) : dy{ dy }, dx{ dx } {};
-    double getSpeed() { return std::sqrt(dx * dx + dy * dy);};
-    double getDx() { return dx; }
-    double getDy() { return dy; }
+    Velocity(float dx, float dy) : dy{ dy }, dx{ dx } {};
+    float getSpeed() { return std::sqrt(dx * dx + dy * dy);};
+    float getDx() { return dx; }
+    float getDy() { return dy; }
     void setDx(float dx) { this->dx = dx; }
     void setDy(float dy) { this->dy = dy; }
 
 private:
-    double dx;
-    double dy;
+    float dx;
+    float dy;
 };

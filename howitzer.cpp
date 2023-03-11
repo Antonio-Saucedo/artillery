@@ -5,7 +5,7 @@
 #include "uiDraw.h"
 #include <cmath>
 
-int Howitzer::muzzleVelocity = 827;
+float Howitzer::muzzleVelocity = 827;
 
 Projectile Howitzer::fire()
 {
