@@ -34,11 +34,11 @@ private:
 	Velocity velocity;
 	bool airborne;
 	TrajectoryEngine te;
-	int angle;
+	float angle;
 
 public:
 	// Constructor
-	Projectile(Position p, Velocity v, int a) : current{ p }, velocity{ v }, angle{ a } {};
+	Projectile(Position p, Velocity v, float a) : current{ p }, velocity{ v }, angle{ a } {};
 	const list<Position>& getPreviousPoints() const {return previous;}	
 	void updatePoint(float interval);
 	Position getCurrentPoint() { return current; };

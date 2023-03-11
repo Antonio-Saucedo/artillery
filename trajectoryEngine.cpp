@@ -104,7 +104,7 @@ float TrajectoryEngine::nextPosition(Position& position,
 									float weight, 
 									float diameter,
 									float mass,
-									int angle) {
+									float angle) {
 
 	float radius = diameter / 2;
 	float area = 3.14159 * radius * radius;
