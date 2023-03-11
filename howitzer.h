@@ -27,22 +27,24 @@ class Howitzer
 public:
 
     // constructors
-    Howitzer();
-    Howitzer(Position p) : point(p) {}
+    Howitzer(Position p) : location(p) {
+        slowRotateSpeed = 0.17;
+        fastRotateSpeed = 2.86;
+    }
 
-    void draw(ogstream o, float age) { o.drawHowitzer(point, angle, age); };
+    void draw(ogstream o, float age) { o.drawHowitzer(location, angle, age); };
     bool isLoaded() { return loaded; };
     float getMuzzleVelocity() { return muzzleVelocity; };
-    void fire(); //create a new projectile here and set loaded to false
+    Projectile fire(); //create a new projectile here and set loaded to false
     void rotate(bool clockwise, bool isFastRotation);
 
 
 
 private:
-    float muzzleVelocity;
-    int angle;
+    static int muzzleVelocity;
+    float angle;
     bool loaded;
     float slowRotateSpeed;
     float fastRotateSpeed;
-    Position point;
+    Position location;
 };

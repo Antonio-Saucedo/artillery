@@ -1,0 +1,25 @@
+#include "howitzer.h"
+#include <iostream>
+#include "position.h"
+#include "projectile.h"
+#include "uiDraw.h"
+#include <cmath>
+
+int Howitzer::muzzleVelocity = 827;
+
+Projectile Howitzer::fire()
+{
+	Velocity v((sin(angle) * muzzleVelocity), cos(angle) * muzzleVelocity);
+	Projectile p(location, v, angle);
+	loaded = false;
+	return p;
+}
+
+void Howitzer::rotate(bool clockwise, bool isFastRotation) {
+	if (clockwise) {
+		isFastRotation ? angle += fastRotateSpeed : angle += slowRotateSpeed;
+	}
+	else {
+		isFastRotation ? angle -= fastRotateSpeed : angle -= slowRotateSpeed;
+	}
+}

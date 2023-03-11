@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ground.cpp" />
+    <ClCompile Include="howitzer.cpp" />
     <ClCompile Include="program.cpp" />
     <ClCompile Include="position.cpp" />
     <ClCompile Include="projectile.cpp" />
