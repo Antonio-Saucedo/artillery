@@ -27,6 +27,7 @@ class Howitzer
 public:
 
     // constructors
+    Howitzer();
     Howitzer(Position p) : location(p) {
         slowRotateSpeed = 0.17f;
         fastRotateSpeed = 2.86f;
