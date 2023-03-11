@@ -10,6 +10,9 @@
 
 void Projectile::updatePoint(float interval)
 {
+	if (interval == 0) { return; };
+	if (interval > 1) { throw std::invalid_argument("Maximum interval is 1"); }
+	if (interval < 0) { throw std::invalid_argument("Minumim interval is 0.01"); }
 	previous.push_back(current);
 	te.nextPosition(current, velocity, interval, weight, diameter, weight, angle);
 
