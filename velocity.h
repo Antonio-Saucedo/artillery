@@ -14,6 +14,7 @@
 class Velocity {
 public:
     // Class fields and methods go here
+    Velocity() { dx = 0; dy = 0; }
     Velocity(float dx, float dy) : dy{ dy }, dx{ dx } {};
     float getSpeed() { return std::sqrt(dx * dx + dy * dy);};
     float getDx() { return dx; }
