@@ -140,8 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ground.cpp" />
-    <ClCompile Include="Lab08.cpp" />
+    <ClCompile Include="program.cpp" />
     <ClCompile Include="position.cpp" />
+    <ClCompile Include="projectile.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="trajectoryEngine.cpp" />
     <ClCompile Include="uiDraw.cpp" />
@@ -149,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ground.h" />
-    <ClInclude Include="angle.h" />
     <ClInclude Include="testHowitzer.h" />
     <ClInclude Include="testProjectile.h" />
     <ClInclude Include="velocity.h" />
