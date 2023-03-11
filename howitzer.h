@@ -14,6 +14,7 @@
 #include <iostream>
 #include "position.h"
 #include "projectile.h"
+#include "uiDraw.h"
 
 class TestHowitzer;
 
@@ -29,11 +30,10 @@ public:
     Howitzer();
     Howitzer(Position p) : point(p) {}
 
-    void draw();
-    bool isLoaded();
-    float getMuzzleVelocity();
-    void fire();
-    void reload(Projectile p);
+    void draw(ogstream o, float age) { o.drawHowitzer(point, angle, age); };
+    bool isLoaded() { return loaded; };
+    float getMuzzleVelocity() { return muzzleVelocity; };
+    void fire(); //create a new projectile here and set loaded to false
     void rotate(bool clockwise, bool isFastRotation);
 
 
