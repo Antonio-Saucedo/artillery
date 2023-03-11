@@ -13,6 +13,8 @@
 #include "position.h"
 #include "velocity.h"
 #include "trajectoryEngine.h"
+#include "uiDraw.h"
+#include "angle.h"
 
 #include <iostream>
 #include <list>
@@ -32,14 +34,16 @@ private:
 	Velocity velocity;
 	bool airborne;
 	TrajectoryEngine te;
+	int angle;
 
 public:
 	// Constructor
-	Projectile(Position start) : current{ start } {};
+	Projectile(Position p, Velocity v, int a) : current{ p }, velocity{ v }, angle{ a } {};
 	const list<Position>& getPreviousPoints() const {return previous;}	
 	void updatePoint(float interval);
 	Position getCurrentPoint() { return current; };
 	bool isAirborne() { return airborne; };
 	bool hit() { if (airborne)airborne = false; };
 	float getSpeed() { return velocity.getSpeed(); };
+	void draw(ogstream o, double age);
 };
