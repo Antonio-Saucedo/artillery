@@ -10,7 +10,7 @@ float Howitzer::muzzleVelocity = 827;
 Projectile Howitzer::fire()
 {
 	Velocity v((sin(angle) * muzzleVelocity), cos(angle) * muzzleVelocity);
-	Projectile p(location, v, angle);
+	Projectile p(location, v, angle, 0.15489f, 46.7);
 	loaded = false;
 	return p;
 }
