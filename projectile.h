@@ -38,12 +38,17 @@ private:
 
 public:
 	// Constructor
-	Projectile(Position p, Velocity v, float a) : current{ p }, velocity{ v }, angle{ a } {};
+	Projectile() {
+		diameter = 0.15489f;
+		weight = 46.7;
+	};
+	Projectile(Position p, Velocity v, float a, float d, float m) : current{ p }, velocity{ v }, angle{ a }, diameter{ d }, weight{m} {};
+
 	const list<Position>& getPreviousPoints() const {return previous;}	
 	void updatePoint(float interval);
 	Position getCurrentPoint() { return current; };
 	bool isAirborne() { return airborne; };
-	bool hit() { if (airborne)airborne = false; };
+	void hit() { airborne = false; };
 	float getSpeed() { return velocity.getSpeed(); };
 	void draw(ogstream o, double age);
 };
