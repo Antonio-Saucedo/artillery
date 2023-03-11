@@ -98,7 +98,7 @@ TrajectoryEngine::TrajectoryEngine()
 };
 
 
-float TrajectoryEngine::nextPosition(Position& position, 
+void TrajectoryEngine::nextPosition(Position& position, 
 									Velocity& velocity, 
 									float time, 
 									float weight, 
@@ -132,7 +132,6 @@ float TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<flo
 
 	if ((target < data[0].first) || (target > data[data.size() - 1].first)) {
 		throw std::invalid_argument("Target is past minimum or maximum range");
-		return;
 	}
 
 	for (auto& x : data) {
