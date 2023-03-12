@@ -43,6 +43,8 @@ public:
 
       test_setZoom();
       test_getZoom();
+
+      cout << "Position Tests Passed\n";
    }
 
 private:

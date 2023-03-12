@@ -40,7 +40,7 @@ public:
 
         test_hit(); // Check hit value updated
 
-        cout << "Tests Passed\n";
+        cout << "Projectile Tests Passed\n";
     }
 
 private:

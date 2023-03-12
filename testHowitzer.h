@@ -8,9 +8,11 @@
  ************************************************************************/
 
 #pragma once
-#include <cassert>
-#include "howitzer.h"
 
+#include <iostream>
+#include "howitzer.h"
+#include "position.h"
+#include <cassert>
 
 using namespace std;
 
@@ -26,6 +28,9 @@ public:
 		void test_rotate_slow();
 		void test_rotate_fast();
 		void test_rotate_counterClockwise();
+		void test_getPosition();
+
+		cout << "Howitzer Tests Passed\n";
 	}
 
 private:
@@ -55,7 +60,7 @@ private:
 		// exercise
 		h.fire();
 		// verify
-		assert(h.loaded = false);
+		assert(h.isLoaded() == false);
 	}
 
 	void test_fire_loaded()
@@ -66,7 +71,7 @@ private:
 		// exercise
 		h.fire();
 		// verify
-		assert(h.loaded = false);
+		assert(h.isLoaded() == false);
 	}
 
 	void test_rotate_slow()
@@ -78,7 +83,7 @@ private:
 		// exercise
 		h.rotate(true, false);
 		// verify
-		assert(h.angle = 5);
+		assert(h.angle == 5);
 	}
 
 	void test_rotate_fast()
@@ -90,7 +95,7 @@ private:
 		// exercise
 		h.rotate(true, true);
 		// verify
-		assert(h.angle = 15);
+		assert(h.angle == 15);
 	}
 
 	void test_rotate_counterClockwise()
@@ -102,6 +107,17 @@ private:
 		// exercise
 		h.rotate(true, true);
 		// verify
-		assert(h.angle = -15);
+		assert(h.angle == -15);
+	}
+
+	void test_getPosition()
+	{
+		// setup
+		Howitzer h;
+		// exercise
+		h.location = Position(0,0);
+		// verify
+		assert(h.location.getMetersX() == 0);
+		assert(h.location.getMetersY() == 0);
 	}
 };
