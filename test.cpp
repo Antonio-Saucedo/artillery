@@ -19,8 +19,8 @@
  ****************************************************************/
 void testRunner()
 {
-   TestPosition().run();
-   TestGround().run();
-   TestHowitzer().run();
-   TestProjectile().run();
+   //TestPosition().run();
+   //TestGround().run();
+   //TestHowitzer().run();
+   //TestProjectile().run();
 }

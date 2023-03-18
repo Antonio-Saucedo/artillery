@@ -100,35 +100,35 @@ TrajectoryEngine::TrajectoryEngine()
 
 void TrajectoryEngine::nextPosition(Position& position, 
 									Velocity& velocity, 
-									float time, 
-									float weight, 
-									float diameter,
-									float mass,
-									float angle) {
+									double time, 
+									double weight, 
+									double diameter,
+									double mass,
+									double angle) {
 
-	float radius = diameter / 2;
-	float area = 3.14159f * radius * radius;
-	float altitude = (float) position.getMetersY();
-	float airDenisty = get_linear_interpolated_result(airDensities, altitude);
-	float soundSpeed = get_linear_interpolated_result(soundSpeeds, altitude);
-	float mach = (float) velocity.getSpeed() / soundSpeed;
-	float dragCoefficient = get_linear_interpolated_result(dragCoefficients, mach);
-	float dragForce = (float) (dragCoefficient * airDenisty * velocity.getSpeed() * velocity.getSpeed() * area);
-	float gravity = -get_linear_interpolated_result(gravityForces, altitude);
+	double radius = diameter / 2;
+	double area = 3.14159f * radius * radius;
+	double altitude = (double) position.getMetersY();
+	double airDenisty = get_linear_interpolated_result(airDensities, altitude);
+	double soundSpeed = get_linear_interpolated_result(soundSpeeds, altitude);
+	double mach = (double) velocity.getSpeed() / soundSpeed;
+	double dragCoefficient = get_linear_interpolated_result(dragCoefficients, mach);
+	double dragForce = (double) (dragCoefficient * airDenisty * velocity.getSpeed() * velocity.getSpeed() * area);
+	double gravity = -get_linear_interpolated_result(gravityForces, altitude);
 
-	float newtons = dragForce / mass;
-	float ddx = -(sin(angle) * newtons);
-	float ddy = gravity - sin(angle) * newtons;
+	double newtons = dragForce / mass;
+	double ddx = -(sin(angle) * newtons);
+	double ddy = gravity - sin(angle) * newtons;
 
 	position.setMetersX(position.getMetersX() + (velocity.getDx() * time) + (0.5 * ddx * (time * time)));
 	position.setMetersY(position.getMetersY() + (velocity.getDy() * time) + (0.5 * ddy * (time * time)));
 
-	velocity.setDx(((float) velocity.getDx()) + (ddx * time));
-	velocity.setDy(((float) velocity.getDy()) + (ddy * time));
+	velocity.setDx(((double) velocity.getDx()) + (ddx * time));
+	velocity.setDy(((double) velocity.getDy()) + (ddy * time));
 
 }
 
-float TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<float, float>> data, float target) {
+double TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<double, double>> data, double target) {
 
 	if ((target < data[0].first) || (target > data[data.size() - 1].first)) {
 		throw std::invalid_argument("Target is past minimum or maximum range");
@@ -140,13 +140,13 @@ float TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<flo
 		}
 
 		// initialize previous pair to the first pair in the vector
-		std::pair<float, float> prevPair = data.front();
+		std::pair<double, double> prevPair = data.front();
 
 		if (!(target > x.first)) {
-			float y1 = prevPair.second;
-			float x3 = x.first;
-			float x1 = prevPair.first;
-			float y3 = x.second;
+			double y1 = prevPair.second;
+			double x3 = x.first;
+			double x1 = prevPair.first;
+			double y3 = x.second;
 			return applyLI(x1, target, x3, y1, y3);
 		}
 		prevPair = x;
@@ -157,8 +157,8 @@ float TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<flo
 
 
 
-float TrajectoryEngine::applyLI(float x1, float x2, float x3, float y1, float y3) {
-	float y2 = (((x2 - x3) * (y3 - y1)) / (x1 - x3)) + y1;
+double TrajectoryEngine::applyLI(double x1, double x2, double x3, double y1, double y3) {
+	double y2 = (((x2 - x3) * (y3 - y1)) / (x1 - x3)) + y1;
 	return y2;
 }
 

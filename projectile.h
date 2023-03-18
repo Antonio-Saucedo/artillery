@@ -28,27 +28,27 @@ class Projectile {
 private:
 	Position current;
 	list<Position> previous;
-	float weight;
-	float radious;
-	float diameter;
+	double weight;
+	double radious;
+	double diameter;
 	Velocity velocity;
 	bool airborne;
 	TrajectoryEngine te;
-	float angle;
+	double angle;
 
 public:
 	// Constructor
 	Projectile() {
-		diameter = 0.15489f;
+		diameter = 0.15489;
 		weight = 46.7;
 	};
-	Projectile(Position p, Velocity v, float a, float d, float m) : current{ p }, velocity{ v }, angle{ a }, diameter{ d }, weight{m} {};
+	Projectile(Position p, Velocity v, double a, double d, double m) : current{ p }, velocity{ v }, angle{ a }, diameter{ d }, weight{m} {};
 
 	const list<Position>& getPreviousPoints() const {return previous;}	
-	void updatePoint(float interval);
+	void updatePoint(double interval);
 	Position getCurrentPoint() { return current; };
 	bool isAirborne() { return airborne; };
 	void hit() { airborne = false; };
-	float getSpeed() { return velocity.getSpeed(); };
+	double getSpeed() { return velocity.getSpeed(); };
 	void draw(ogstream o, double age);
 };

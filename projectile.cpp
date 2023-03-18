@@ -8,7 +8,7 @@
 #include <iostream>
 #include <list>
 
-void Projectile::updatePoint(float interval)
+void Projectile::updatePoint(double interval)
 {
 	if (interval == 0) { return; };
 	if (interval > 1) { throw std::invalid_argument("Maximum interval is 1"); }

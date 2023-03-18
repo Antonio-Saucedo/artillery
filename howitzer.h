@@ -27,26 +27,28 @@ class Howitzer
 public:
 
     // constructors
-    Howitzer();
-    Howitzer(Position p) : location(p) {
-        slowRotateSpeed = 0.17f;
-        fastRotateSpeed = 2.86f;
+    Howitzer() {location = Position( 100,100 ); }; //bandaid code
+    Howitzer(Position p) {
+        slowRotateSpeed = 0.0017;
+        fastRotateSpeed = 0.0286;
+        location = p;
     }
 
-    void draw(ogstream o, float age) { o.drawHowitzer(location, angle, age); };
+    void draw(ogstream& o, double age) { o.drawHowitzer(location, angle, age); };
     bool isLoaded() { return loaded; };
-    float getMuzzleVelocity() { return muzzleVelocity; };
+    double getMuzzleVelocity() { return muzzleVelocity; };
     Projectile fire(); //create a new projectile here and set loaded to false
     void rotate(bool clockwise, bool isFastRotation);
     Position getPosition() { return location; };
+    double getAngle() { return angle; }
 
 
 
 private:
-    static float muzzleVelocity;
-    float angle;
+    static double muzzleVelocity;
+    double angle;
     bool loaded;
-    float slowRotateSpeed;
-    float fastRotateSpeed;
+    double slowRotateSpeed;
+    double fastRotateSpeed;
     Position location;
 };

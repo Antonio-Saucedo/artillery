@@ -9,24 +9,24 @@ using namespace std;
 
 class TrajectoryEngine {
 private:
-	float numDragCoefficients;
-	float numAirDensities;
-	float numSoundSpeeds;
-	float numGravity;
+	double numDragCoefficients;
+	double numAirDensities;
+	double numSoundSpeeds;
+	double numGravity;
 
-	std::vector<std::pair<float, float>> dragCoefficients;
-	std::vector<std::pair<float, float>> soundSpeeds;
-	std::vector<std::pair<float, float>> airDensities;
-	std::vector<std::pair<float, float>> gravityForces;
+	std::vector<std::pair<double, double>> dragCoefficients;
+	std::vector<std::pair<double, double>> soundSpeeds;
+	std::vector<std::pair<double, double>> airDensities;
+	std::vector<std::pair<double, double>> gravityForces;
 
-	float get_linear_interpolated_result(std::vector<std::pair<float, float>> data, float target);
-	float applyLI(float x1, float x2, float x3, float y1, float y3);
+	double get_linear_interpolated_result(std::vector<std::pair<double, double>> data, double target);
+	double applyLI(double x1, double x2, double x3, double y1, double y3);
 
 public:
 	// Constructor
 	TrajectoryEngine();
 
-	void nextPosition(Position& position, Velocity& velocity, float time, float weight, float diameter, float mass, float angle);
+	void nextPosition(Position& position, Velocity& velocity, double time, double weight, double diameter, double mass, double angle);
 
 
 };

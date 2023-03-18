@@ -4,8 +4,9 @@
 #include "projectile.h"
 #include "uiDraw.h"
 #include <cmath>
+#include <chrono>
 
-float Howitzer::muzzleVelocity = 827;
+double Howitzer::muzzleVelocity = 827;
 
 Projectile Howitzer::fire()
 {
