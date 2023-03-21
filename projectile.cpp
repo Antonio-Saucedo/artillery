@@ -21,6 +21,12 @@ void Projectile::updatePoint(double interval)
 	}
 }
 
-void Projectile::draw(ogstream o, double age) {
+void Projectile::draw(ogstream& o, double age) {
 	o.drawProjectile(current, age);
+}
+
+void Projectile::drawTrail(ogstream& o) {
+	for (const Position& point : previous) {
+		o.drawProjectile(point, 0);
+	}
 }

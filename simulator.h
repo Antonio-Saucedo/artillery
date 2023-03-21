@@ -21,7 +21,7 @@
 class Simulator {
 private:
 	Howitzer howitzer;
-	Projectile projectile;
+	Projectile* projectile;
 	Ground ground;
 	Position ptUpperRight;
 	double interval;
@@ -33,10 +33,12 @@ private:
 	void reset();
 	void generate_stats();
 	void isHitOnTarget();
+	bool isPositionOnScreen(const Position& p);
+	bool didProjectileHit();
 
 public:
 	Simulator(Position ptUpperRight) :
-		//projectile(howitzer.getPosition()),
+		projectile(NULL),
 		ptUpperRight(ptUpperRight),
 		ground(ptUpperRight),
 		interval(1.0),

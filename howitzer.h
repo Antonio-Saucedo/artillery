@@ -37,7 +37,7 @@ public:
     void draw(ogstream& o, double age) { o.drawHowitzer(location, angle, age); };
     bool isLoaded() { return loaded; };
     double getMuzzleVelocity() { return muzzleVelocity; };
-    Projectile fire(); //create a new projectile here and set loaded to false
+    Projectile* fire(); //create a new projectile here and set loaded to false
     void rotate(bool clockwise, bool isFastRotation);
     Position getPosition() { return location; };
     double getAngle() { return angle; }

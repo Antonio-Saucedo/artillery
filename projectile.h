@@ -42,7 +42,8 @@ public:
 		diameter = 0.15489;
 		weight = 46.7;
 	};
-	Projectile(Position p, Velocity v, double a, double d, double m) : current{ p }, velocity{ v }, angle{ a }, diameter{ d }, weight{m} {};
+	Projectile(Position p, Velocity v, double a, double d, double m) : 
+		current{ p }, velocity{ v }, angle{ a }, diameter{ d }, weight{ m }, airborne(true) {};
 
 	const list<Position>& getPreviousPoints() const {return previous;}	
 	void updatePoint(double interval);
@@ -50,5 +51,6 @@ public:
 	bool isAirborne() { return airborne; };
 	void hit() { airborne = false; };
 	double getSpeed() { return velocity.getSpeed(); };
-	void draw(ogstream o, double age);
+	void draw(ogstream& o, double age);
+	void drawTrail(ogstream& o);
 };
