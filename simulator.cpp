@@ -10,14 +10,19 @@ void Simulator::reset()
 {
 }
 
-//void Simulator::generate_stats()
-//{
-//	const std::chrono::time_point<std::chrono::steady_clock> elapsedTime = std::chrono::steady_clock::now() - timeOfFire;
-//
-//	StatisticsDisplay.updateStats(ground.getElevationMeters(projectile.getCurrentPoint(),
-//		projectile.getSpeed(), abs(howitzer.getPoint().getX()) - projectile.getCurrentPoint().getX()),
-//		elapsedTime;
-//}
+void Simulator::generate_stats()
+{
+    if (projectile != NULL) {
+        std::chrono::time_point<std::chrono::steady_clock> endTime = std::chrono::steady_clock::now();
+        auto elapsedTime = chrono::duration_cast<chrono::milliseconds>(endTime - timeOfFire).count();
+
+        sd.updateStats(ground.getElevationMeters(projectile->getCurrentPoint()), projectile->getSpeed(),
+            howitzer.getPosition().getMetersX() - projectile->getCurrentPoint().getMetersX(), elapsedTime);
+    }
+    else {
+        sd.updateStats(0.0f, 0.0f, 0.0f, (long long)0.0);
+    }
+}
 
 //void Simulator::isHitOnTarget()
 //{
@@ -71,6 +76,7 @@ void Simulator::input(const Interface* pUI)
 
     // fire that gun
     if (pUI->isSpace()) {
+        timeOfFire = std::chrono::steady_clock::now();
         projectile = howitzer.fire();
         elapsedTime = -1;
     }
@@ -79,6 +85,7 @@ void Simulator::input(const Interface* pUI)
 
 void Simulator::update()
 {
+    generate_stats();
     // If we have a projectile in the air
     if (projectile != NULL) {
         projectile->updatePoint(interval);

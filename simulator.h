@@ -25,14 +25,15 @@ private:
 	Ground ground;
 	Position ptUpperRight;
 	double interval;
-	//StatisticsDisplay sd;
+	StatisticsDisplay sd;
+	std::chrono::time_point<std::chrono::steady_clock> timeOfFire;
 	double elapsedTime;
 	bool hitTarget;
 	bool hitGround;
 
 	void reset();
 	void generate_stats();
-	void isHitOnTarget();
+	//void isHitOnTarget();
 	bool isPositionOnScreen(const Position& p);
 	bool didProjectileHit();
 
@@ -42,7 +43,8 @@ public:
 		ptUpperRight(ptUpperRight),
 		ground(ptUpperRight),
 		interval(1.0),
-		//sd(),
+		sd(),
+		timeOfFire(std::chrono::steady_clock::now()),
 		hitTarget(false),
 		hitGround(false)
 	{
