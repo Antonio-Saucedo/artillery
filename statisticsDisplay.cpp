@@ -1,6 +1,6 @@
 #include "statisticsDisplay.h"
 
-void StatisticsDisplay::updateStats(float altitude, float speed, float distance, long long hangTime)
+void StatisticsDisplay::updateStats(int altitude, int speed, int distance, long long hangTime)
 {
 	ogstream gout;
 	gout.precision(1);
@@ -11,10 +11,10 @@ void StatisticsDisplay::updateStats(float altitude, float speed, float distance,
 
 	gout.setPosition(drawPos);
 
-	gout << "Altitude: " << altitude << "\n";
-	gout << "Speed: " << speed << "\n";
-	gout << "Distance: " << distance << "\n";
-	gout << "Hang Time: " << hangTime << "\n";
+	gout << "Altitude: " << altitude << "m\n";
+	gout << "Speed: " << speed << "km/s\n";
+	gout << "Distance: " << distance << "km\n";
+	gout << "Hang Time: " << hangTime << "ms\n";
 }
 
 //void StatisticsDisplay::render()

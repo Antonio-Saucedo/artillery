@@ -15,20 +15,20 @@
 
 class StatisticsDisplay {
 private:
-	float altitude;
-	float speed;
-	float distance;
+	int altitude;
+	int speed;
+	int distance;
 	long long hangTime;
 	Position point;
 
 public:
 	StatisticsDisplay() {
-		altitude = 0.0f;
-		speed = 0.0f;
-		distance = 0.0f;
+		altitude = 0.0;
+		speed = 0.0;
+		distance = 0.0;
 		hangTime = (long long) 0.0;
 		point = Position();
 	}
-	void updateStats(float altitude, float speed, float distance, long long hangTime);
+	void updateStats(int altitude, int speed, int distance, long long hangTime);
 	//void render();
 };
