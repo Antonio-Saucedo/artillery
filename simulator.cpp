@@ -1,6 +1,7 @@
 #include "simulator.h"
 #include "statisticsDisplay.h"
 #include "howitzer.h"
+#include <math.h>
 
 
 #include <memory>
@@ -20,7 +21,7 @@ void Simulator::generate_stats()
             howitzer.getPosition().getMetersX() - projectile->getCurrentPoint().getMetersX(), elapsedTime);
     }
     else {
-        sd.updateStats(0.0f, 0.0f, 0.0f, (long long)0.0);
+        sd.updateStats(0, 0, 0, (long long)0.0);
     }
 }
 
@@ -44,9 +45,8 @@ bool Simulator::isPositionOnScreen(const Position& p) {
 }
 
 bool Simulator::didProjectileHit() {
-    Position projectileLocation = projectile->getCurrentPoint();
-    double projectileY = projectileLocation.getMetersY();
-    double elevationAtProjectileX = ground.getElevationMeters(projectileLocation);
+    double projectileY = projectile->getCurrentPoint().getMetersY();
+    double elevationAtProjectileX = ground.getElevationMeters(projectile->getCurrentPoint());
 
     if (elevationAtProjectileX > projectileY) {
         return true;
@@ -64,12 +64,12 @@ void Simulator::input(const Interface* pUI)
 
     // move by a little
     if (pUI->isUp())
-        if (howitzer.getAngle() > 0)
+        if (atan2(projectile->getCurrentPoint().getMetersY(), projectile->getCurrentPoint().getMetersX()) > 0)
             howitzer.rotate(false, false);
         else
             howitzer.rotate(true, false);
     if (pUI->isDown())
-        if (howitzer.getAngle() > 0)
+        if (atan2(projectile->getCurrentPoint().getMetersY(), projectile->getCurrentPoint().getMetersX()) > 0)
             howitzer.rotate(true, false);
         else
             howitzer.rotate(false, false);

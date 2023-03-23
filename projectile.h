@@ -28,8 +28,8 @@ class Projectile {
 private:
 	Position current;
 	list<Position> previous;
-	double weight;
-	double radious;
+	double weight ;
+	//double radious;
 	double diameter;
 	Velocity velocity;
 	bool airborne;
@@ -38,10 +38,8 @@ private:
 
 public:
 	// Constructor
-	Projectile() {
-		diameter = 0.15489;
-		weight = 46.7;
-	};
+	Projectile() {};
+
 	Projectile(Position p, Velocity v, double a, double d, double m) : 
 		current{ p }, velocity{ v }, angle{ a }, diameter{ d }, weight{ m }, airborne(true) {};
 
@@ -53,4 +51,5 @@ public:
 	double getSpeed() { return velocity.getSpeed(); };
 	void draw(ogstream& o, double age);
 	void drawTrail(ogstream& o);
+	double getAngle() { return angle; };
 };

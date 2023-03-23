@@ -14,7 +14,7 @@ void Projectile::updatePoint(double interval)
 	if (interval > 1) { throw std::invalid_argument("Maximum interval is 1"); }
 	if (interval < 0) { throw std::invalid_argument("Minumim interval is 0.01"); }
 	previous.push_back(current);
-	te.nextPosition(current, velocity, interval, weight, diameter, weight, angle);
+	te.nextPosition(current, velocity, interval, weight, diameter, weight, atan2(this->getCurrentPoint().getMetersX(), this->getCurrentPoint().getMetersY()));
 
 	if (previous.size() > 10) {
 		previous.pop_front(); // Remove the first element from the list

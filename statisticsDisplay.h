@@ -23,9 +23,9 @@ private:
 
 public:
 	StatisticsDisplay() {
-		altitude = 0.0;
-		speed = 0.0;
-		distance = 0.0;
+		altitude = 0;
+		speed = 0;
+		distance = 0;
 		hangTime = (long long) 0.0;
 		point = Position();
 	}

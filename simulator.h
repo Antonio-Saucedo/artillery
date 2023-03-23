@@ -39,7 +39,7 @@ private:
 
 public:
 	Simulator(Position ptUpperRight) :
-		projectile(NULL),
+		projectile(),
 		ptUpperRight(ptUpperRight),
 		ground(ptUpperRight),
 		interval(1.0),
