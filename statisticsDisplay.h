@@ -29,6 +29,6 @@ public:
 		hangTime = (long long) 0.0;
 		point = Position();
 	}
-	void updateStats(int altitude, int speed, int distance, long long hangTime);
-	//void render();
+	void updateStats(int altitude, int speed, int distance, double hangTime);
+	void render();
 };

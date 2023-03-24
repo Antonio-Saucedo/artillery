@@ -6,7 +6,7 @@
 #include <cmath>
 #include <chrono>
 
-double Howitzer::muzzleVelocity = 827;
+double Howitzer::muzzleVelocity = 1127; // 827 default
 
 Projectile* Howitzer::fire()
 {
@@ -18,9 +18,11 @@ Projectile* Howitzer::fire()
 
 void Howitzer::rotate(bool clockwise, bool isFastRotation) {
 	if (clockwise) {
-		isFastRotation ? angle += fastRotateSpeed : angle += slowRotateSpeed;
+		if (!(angle > maxRightAngle)) { //-1.57 
+			isFastRotation ? angle += fastRotateSpeed : angle += slowRotateSpeed; }
 	}
 	else {
-		isFastRotation ? angle -= fastRotateSpeed : angle -= slowRotateSpeed;
+		if (!(angle < maxLeftAngle)) {  //1.57
+			isFastRotation ? angle -= fastRotateSpeed : angle -= slowRotateSpeed; }
 	}
 }

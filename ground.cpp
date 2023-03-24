@@ -15,8 +15,8 @@ const int WIDTH_HOWITZER = 14;
 
 const double MIN_ALTITUDE = 300.0;  // min altitude is at 984'
 const double MAX_ALTITUDE = 3000.0; // max altitude is 3,000m or 9842.52ft
-const double MAX_SLOPE = 1.0; // steapness of the features. Smaller number is flatter
-const double LUMPINESS = 0.15; // size of the hills. Smaller number is bigger features
+const double MAX_SLOPE = 0.1; // steapness of the features. Smaller number is flatter 1.0 default
+const double LUMPINESS = 0.1; // size of the hills. Smaller number is bigger features .15 default
 const double TEXTURE = 3.0;   // size of the small features such as rocks
 
 /************************************************************************
@@ -116,6 +116,7 @@ Position Ground::getTarget() const
 
          // determine the elevation according to the slope
          ground[i] = ground[i - 1] + dy + random(-TEXTURE, TEXTURE);
+         if (ground[i] < 0) ground[i] = 0;
          assert(ground[i] >= 0.0 && ground[i] <= posUpperRight.getPixelsY());
       }
    }

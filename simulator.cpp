@@ -3,25 +3,21 @@
 #include "howitzer.h"
 #include <math.h>
 
-
-#include <memory>
-#include <chrono>
+#include <cstdlib>          // FOR ABS()
 
 void Simulator::reset()
 {
+    //needs resetting
+    cout << "Hit\n";
 }
 
 void Simulator::generate_stats()
 {
     if (projectile != NULL) {
-        std::chrono::time_point<std::chrono::steady_clock> endTime = std::chrono::steady_clock::now();
-        auto elapsedTime = chrono::duration_cast<chrono::milliseconds>(endTime - timeOfFire).count();
-
-        sd.updateStats(ground.getElevationMeters(projectile->getCurrentPoint()), projectile->getSpeed(),
-            howitzer.getPosition().getMetersX() - projectile->getCurrentPoint().getMetersX(), elapsedTime);
-    }
-    else {
-        sd.updateStats(0, 0, 0, (long long)0.0);
+        sd.updateStats(projectile->getCurrentPoint().getMetersY(),
+            projectile->getSpeed(),
+            abs(howitzer.getPosition().getMetersX() - projectile->getCurrentPoint().getMetersX()),
+            elapsedTime);
     }
 }
 
@@ -64,12 +60,12 @@ void Simulator::input(const Interface* pUI)
 
     // move by a little
     if (pUI->isUp())
-        if (atan2(projectile->getCurrentPoint().getMetersY(), projectile->getCurrentPoint().getMetersX()) > 0)
+        if (howitzer.getAngle() > 0)
             howitzer.rotate(false, false);
         else
             howitzer.rotate(true, false);
     if (pUI->isDown())
-        if (atan2(projectile->getCurrentPoint().getMetersY(), projectile->getCurrentPoint().getMetersX()) > 0)
+        if (howitzer.getAngle() > 0)
             howitzer.rotate(true, false);
         else
             howitzer.rotate(false, false);
@@ -88,6 +84,9 @@ void Simulator::update()
     generate_stats();
     // If we have a projectile in the air
     if (projectile != NULL) {
+        if (didProjectileHit()) {
+            reset();
+        }
         projectile->updatePoint(interval);
         // If it hit the ground or went out of the screen
         if (didProjectileHit() || !isPositionOnScreen(projectile->getCurrentPoint())) {
@@ -97,7 +96,7 @@ void Simulator::update()
             projectile = NULL;
         }
     }
-    elapsedTime += 1;
+    elapsedTime += 0.5;
 }
 
 void Simulator::renderFrame()
@@ -105,6 +104,7 @@ void Simulator::renderFrame()
     ogstream gout;
     ground.draw(gout);
     howitzer.draw(gout, elapsedTime);
+    sd.render();
     if (projectile != NULL) {
         if (isPositionOnScreen(projectile->getCurrentPoint())) {
             projectile->draw(gout, elapsedTime);

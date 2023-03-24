@@ -31,6 +31,8 @@ public:
     Howitzer(Position p) {
         slowRotateSpeed = 0.0017;
         fastRotateSpeed = 0.0286;
+        maxLeftAngle = -3.14 / 2;
+        maxRightAngle = 3.14 / 2;
         location = p;
     }
 
@@ -51,4 +53,6 @@ private:
     double slowRotateSpeed;
     double fastRotateSpeed;
     Position location;
+    double maxLeftAngle;
+    double maxRightAngle;
 };

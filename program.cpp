@@ -61,69 +61,6 @@ public:
  **************************************/
 void callBack(const Interface* pUI, void* p)
 {
-   //// the first step is to cast the void pointer into a game object. This
-   //// is the first step of every single callback function in OpenGL. 
-   //Demo* pDemo = (Demo*)p;
-
-   ////
-   //// accept input
-   ////
-
-   //// move a large amount
-   //if (pUI->isRight())
-   //   pDemo->angle += 0.05;
-   //if (pUI->isLeft())
-   //   pDemo->angle -= 0.05;
-
-   //// move by a little
-   //if (pUI->isUp())
-   //   pDemo->angle += (pDemo->angle >= 0 ? -0.003 : 0.003);
-   //if (pUI->isDown())
-   //   pDemo->angle += (pDemo->angle >= 0 ? 0.003 : -0.003);
-
-   //// fire that gun
-   //if (pUI->isSpace())
-   //   pDemo->time = 0.0;
-
-   ////
-   //// perform all the game logic
-   ////
-
-   //// advance time by half a second.
-   //pDemo->time += 0.5;
-
-   //// move the projectile across the screen
-   //for (int i = 0; i < 20; i++)
-   //{
-   //   double x = pDemo->projectilePath[i].getPixelsX();
-   //   x -= 1.0;
-   //   if (x < 0)
-   //      x = pDemo->ptUpperRight.getPixelsX();
-   //   pDemo->projectilePath[i].setPixelsX(x);
-   //}
-
-   ////
-   //// draw everything
-   ////
-
-   //ogstream gout(Position(10.0, pDemo->ptUpperRight.getPixelsY() - 20.0));
-
-   //// draw the ground first
-   //pDemo->ground.draw(gout);
-
-   //// draw the howitzer
-   //gout.drawHowitzer(pDemo->ptHowitzer, pDemo->angle, pDemo->time);
-
-   //// draw the projectile
-   //for (int i = 0; i < 20; i++)
-   //   gout.drawProjectile(pDemo->projectilePath[i], 0.5 * (double)i);
-
-   //// draw some text on the screen
-   //gout.setf(ios::fixed | ios::showpoint);
-   //gout.precision(1);
-   //gout << "Time since the bullet was fired: "
-   //   << pDemo->time << "s\n";
-
    // Cast a void pointer to the game object
    Simulator * sim = (Simulator*)p;
 

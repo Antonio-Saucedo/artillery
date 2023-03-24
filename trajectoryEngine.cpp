@@ -101,14 +101,13 @@ TrajectoryEngine::TrajectoryEngine()
 void TrajectoryEngine::nextPosition(Position& position, 
 									Velocity& velocity, 
 									double time, 
-									double weight, 
 									double diameter,
 									double mass,
 									double angle) {
 
 	double radius = diameter / 2;
 	double area = 3.14159f * radius * radius;
-	double altitude = (double) position.getMetersY();
+	double altitude = (double) position.getMetersY(); 
 	double airDenisty = get_linear_interpolated_result(airDensities, altitude);
 	double soundSpeed = get_linear_interpolated_result(soundSpeeds, altitude);
 	double mach = (double) velocity.getSpeed() / soundSpeed;
@@ -118,7 +117,7 @@ void TrajectoryEngine::nextPosition(Position& position,
 
 	double newtons = dragForce / mass;
 	double ddx = -(sin(angle) * newtons);
-	double ddy = gravity - sin(angle) * newtons;
+	double ddy = gravity - cos(angle) * newtons;
 
 	position.setMetersX(position.getMetersX() + (velocity.getDx() * time) + (0.5 * ddx * (time * time)));
 	position.setMetersY(position.getMetersY() + (velocity.getDy() * time) + (0.5 * ddy * (time * time)));
@@ -130,9 +129,16 @@ void TrajectoryEngine::nextPosition(Position& position,
 
 double TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<double, double>> data, double target) {
 
-	if ((target < data[0].first) || (target > data[data.size() - 1].first)) {
-		throw std::invalid_argument("Target is past minimum or maximum range");
+	// If the target is less than the range of the data, return the lowest value
+	if (target < data[0].first) {
+		return data[0].second;
 	}
+	// Simlarly, if the target is higher than the highest range of the data
+	else if (target > data[data.size() - 1].first) {
+		return data[data.size() - 1].second;
+	}
+
+	std::pair<double, double> prevPair;
 
 	for (auto& x : data) {
 		if (target == x.first) {
@@ -140,18 +146,16 @@ double TrajectoryEngine::get_linear_interpolated_result(std::vector<std::pair<do
 		}
 
 		// initialize previous pair to the first pair in the vector
-		std::pair<double, double> prevPair = data.front();
 
 		if (!(target > x.first)) {
-			double y1 = prevPair.second;
-			double x3 = x.first;
-			double x1 = prevPair.first;
-			double y3 = x.second;
-			return applyLI(x1, target, x3, y1, y3);
+			double y0 = prevPair.second;
+			double x1 = x.first;
+			double x0 = prevPair.first;
+			double y1 = x.second;
+			return applyLI(x0, target, x1, y0, y1);
 		}
 		prevPair = x;
 	}
-
 	throw std::logic_error("Should not have reached here");
 }
 

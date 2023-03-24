@@ -26,7 +26,7 @@ public:
 	// Constructor
 	TrajectoryEngine();
 
-	void nextPosition(Position& position, Velocity& velocity, double time, double weight, double diameter, double mass, double angle);
+	void nextPosition(Position& position, Velocity& velocity, double time, double diameter, double mass, double angle);
 
 
 };
