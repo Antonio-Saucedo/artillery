@@ -8,7 +8,10 @@
 void Simulator::reset()
 {
     //needs resetting
-    cout << "Hit\n";
+    Position pHowitzer;
+    pHowitzer.setPixelsX(newHowitzerX());
+    ground.reset(pHowitzer);
+    howitzer = Howitzer(pHowitzer);
 }
 
 void Simulator::generate_stats()
@@ -21,14 +24,18 @@ void Simulator::generate_stats()
     }
 }
 
-//void Simulator::isHitOnTarget()
-//{
-//    if (ground.getTarget() == projectile.getCurrentPoint()) {
-//        hitTarget = true;
-//    } else {
-//        hitGround = true;
-//    }
-//}
+bool Simulator::isHitOnTarget()
+{
+    double px = projectile->getCurrentPoint().getPixelsX();
+    double py = projectile->getCurrentPoint().getPixelsY();
+    double tx = ground.getTarget().getPixelsX();
+    double ty = ground.getTarget().getPixelsY();
+
+    if (abs(px - tx) < 5 && abs(py - ty) < 5) {
+        return true;
+    }
+    return false;
+}
 
 bool Simulator::isPositionOnScreen(const Position& p) {
     double x = p.getPixelsX();
@@ -72,21 +79,22 @@ void Simulator::input(const Interface* pUI)
 
     // fire that gun
     if (pUI->isSpace()) {
-        timeOfFire = std::chrono::steady_clock::now();
-        projectile = howitzer.fire();
-        elapsedTime = -1;
+        if (projectile == NULL) {
+            timeOfFire = std::chrono::steady_clock::now();
+            projectile = howitzer.fire();
+            elapsedTime = -1;
+        }
     }
 
 }
 
 void Simulator::update()
 {
-    generate_stats();
     // If we have a projectile in the air
     if (projectile != NULL) {
-        if (didProjectileHit()) {
-            reset();
-        }
+        // Check for target proximity
+        if (isHitOnTarget()) { reset(); }
+        generate_stats();
         projectile->updatePoint(interval);
         // If it hit the ground or went out of the screen
         if (didProjectileHit() || !isPositionOnScreen(projectile->getCurrentPoint())) {

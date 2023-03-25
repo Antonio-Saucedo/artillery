@@ -155,6 +155,7 @@
     <ClInclude Include="ground.h" />
     <ClInclude Include="testHowitzer.h" />
     <ClInclude Include="testProjectile.h" />
+    <ClInclude Include="utils.h" />
     <ClInclude Include="velocity.h" />
     <ClInclude Include="trajectoryEngine.h" />
     <ClInclude Include="statisticsDisplay.h" />

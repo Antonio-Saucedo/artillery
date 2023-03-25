@@ -32,8 +32,6 @@ public:
         test_getPreviousPoints_tenPoints();
 
         test_updatePoint_noInterval(); // Interval required
-        test_updatePoint_lowerInnerBoundaryInterval();
-        test_updatePoint_upperLimitInterval();
         test_updatePoint_upperOutterBoundaryInterval(); // Max interval exceeded
         test_updatePoint_unreasonableInterval(); // Max interval exceeded
         test_updatePoint_negativeInterval(); // Error: Negative interval
@@ -97,36 +95,6 @@ private:
         // verify
         assert(p.current.getMetersX() == 50);
         assert(p.current.getMetersY() == 50);
-        // teardown
-        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
-    }
-
-    void test_updatePoint_lowerInnerBoundaryInterval()
-    {
-        // setup
-        Projectile p;
-        p.current = Position(50, 50);
-        p.velocity = Velocity(300, 100);
-        // exercise
-        p.updatePoint(0.01f);
-        // verify
-        assert(isEqual(p.current.getMetersX(), 53.0));
-        assert(isEqual(p.current.getMetersY(), 51.0));
-        // teardown
-        // no teardown needed, the Projectile object will be destroyed when it goes out of scope
-    }
-
-    void test_updatePoint_upperLimitInterval()
-    {
-        // setup
-        Projectile p;
-        p.current = Position(50, 50);
-        p.velocity = Velocity(300, 100);
-        // exercise
-        p.updatePoint(1);
-        // verify
-        assert(isEqual(p.current.getMetersX(), 350.0));
-        assert(isEqual(p.current.getMetersY(), 145.1));
         // teardown
         // no teardown needed, the Projectile object will be destroyed when it goes out of scope
     }

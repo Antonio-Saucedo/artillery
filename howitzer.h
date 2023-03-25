@@ -43,7 +43,7 @@ public:
     void rotate(bool clockwise, bool isFastRotation);
     Position getPosition() { return location; };
     double getAngle() { return angle; }
-
+    void setPosition(Position p) {location = p;}
 
 
 private:

@@ -6,7 +6,7 @@
 #include <cmath>
 #include <chrono>
 
-double Howitzer::muzzleVelocity = 1127; // 827 default
+double Howitzer::muzzleVelocity = 1227; // 827 default
 
 Projectile* Howitzer::fire()
 {

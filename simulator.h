@@ -33,9 +33,13 @@ private:
 
 	void reset();
 	void generate_stats();
-	//void isHitOnTarget();
+	bool isHitOnTarget();
 	bool isPositionOnScreen(const Position& p);
 	bool didProjectileHit();
+	int newHowitzerX() {
+		int width = (int)ptUpperRight.getPixelsX();
+		return random((int)0, width - 1);
+	}
 
 public:
 	Simulator(Position ptUpperRight) :
@@ -52,7 +56,7 @@ public:
 		Position ptHowitzer;
 		// Set the x position to a random witdth in the screen width
 		int width = (int)ptUpperRight.getPixelsX();
-		ptHowitzer.setPixelsX(random((int)0, width - 1));
+		ptHowitzer.setPixelsX(newHowitzerX());
 		// Reset the ground and give it the howitzers position
 		// This will set the y position automatically
 		ground.reset(ptHowitzer);
